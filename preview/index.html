@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VetorMD Preview Tablet</title>
+    <style>
+      :root {
+        --bg: #f3f5fb;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --brand: #2f6fed;
+        --ok: #10b981;
+        --warn: #f59e0b;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 14px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+      }
+      .title { font-size: 14px; color: var(--muted); margin: 0 0 8px; }
+      .kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .value { font-size: 24px; font-weight: 700; margin: 4px 0; }
+      .small { font-size: 12px; color: var(--muted); }
+      .charts { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .bar-row { display: grid; grid-template-columns: 80px 1fr 60px; gap: 8px; align-items: center; margin-bottom: 8px; }
+      .bar-wrap { height: 10px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+      .bar { height: 100%; background: var(--brand); }
+      .pill { font-size: 11px; border-radius: 999px; padding: 4px 8px; background: #e8eefc; color: var(--brand); display: inline-block; }
+      table { width: 100%; border-collapse: collapse; font-size: 13px; }
+      th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #eef2f7; }
+      th { color: var(--muted); font-size: 11px; text-transform: uppercase; }
+      .grid-2 { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      .status { font-size: 11px; border-radius: 999px; padding: 3px 8px; }
+      .ok { background: #dcfce7; color: #166534; }
+      .late { background: #ffe4e6; color: #9f1239; }
+      .footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--muted);
+        padding: 8px 0 20px;
+      }
+      @media (min-width: 768px) {
+        .kpis { grid-template-columns: repeat(4, 1fr); }
+        .charts { grid-template-columns: repeat(3, 1fr); }
+        .grid-2 { grid-template-columns: 2fr 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <section class="card">
+        <p class="title">Preview rápido (tablet)</p>
+        <h1 style="margin:0">VetorMD • Dashboard de Imóveis</h1>
+        <p class="small">Versão de demonstração sem instalar nada (abre direto no navegador).</p>
+      </section>
+
+      <section class="kpis">
+        <article class="card"><p class="title">Total de imóveis</p><p class="value">24</p><p class="small">18 ocupados • 4 vagos • 2 manutenção</p></article>
+        <article class="card"><p class="title">Receita mensal</p><p class="value">R$ 89.400</p><p class="small">+8,2% vs mês passado</p></article>
+        <article class="card"><p class="title">Despesas</p><p class="value">R$ 21.700</p><p class="small">Manutenção e impostos</p></article>
+        <article class="card"><p class="title">Lucro líquido</p><p class="value">R$ 67.700</p><p class="small">Margem 75,7%</p></article>
+      </section>
+
+      <section class="charts">
+        <article class="card">
+          <p class="title">Receita prevista (6 meses)</p>
+          <div class="bar-row"><span>Mai</span><div class="bar-wrap"><div class="bar" style="width:72%"></div></div><span>14.8k</span></div>
+          <div class="bar-row"><span>Jun</span><div class="bar-wrap"><div class="bar" style="width:76%"></div></div><span>15.6k</span></div>
+          <div class="bar-row"><span>Jul</span><div class="bar-wrap"><div class="bar" style="width:79%"></div></div><span>16.3k</span></div>
+          <div class="bar-row"><span>Ago</span><div class="bar-wrap"><div class="bar" style="width:82%"></div></div><span>16.9k</span></div>
+          <div class="bar-row"><span>Set</span><div class="bar-wrap"><div class="bar" style="width:84%"></div></div><span>17.1k</span></div>
+          <div class="bar-row"><span>Out</span><div class="bar-wrap"><div class="bar" style="width:86%"></div></div><span>17.5k</span></div>
+        </article>
+        <article class="card">
+          <p class="title">Ocupação por tipo</p>
+          <p class="small">Apartamentos 58%</p><div class="bar-wrap" style="margin-bottom:8px"><div class="bar" style="width:58%"></div></div>
+          <p class="small">Casas 27%</p><div class="bar-wrap" style="margin-bottom:8px"><div class="bar" style="width:27%; background: var(--ok)"></div></div>
+          <p class="small">Comercial 15%</p><div class="bar-wrap"><div class="bar" style="width:15%; background: var(--warn)"></div></div>
+        </article>
+        <article class="card">
+          <p class="title">Insights automáticos</p>
+          <p class="pill">ALTO IMPACTO</p>
+          <p style="margin:8px 0 0"><strong>Risco de inadimplência moderado</strong></p>
+          <p class="small">2 contratos com atraso recorrente nos últimos 60 dias.</p>
+          <p class="small" style="color:var(--brand)">Ação sugerida: lembrete D-5 + cobrança PIX automática.</p>
+        </article>
+      </section>
+
+      <section class="grid-2">
+        <article class="card">
+          <p class="title">Contratos</p>
+          <table>
+            <thead><tr><th>ID</th><th>Período</th><th>Valor</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>C-501</td><td>01/07/2025 → 30/06/2026</td><td>R$ 4.200</td><td><span class="status ok">ativo</span></td></tr>
+              <tr><td>C-502</td><td>10/01/2025 → 09/01/2026</td><td>R$ 3.500</td><td><span class="status late">atrasado</span></td></tr>
+              <tr><td>C-503</td><td>01/03/2026 → 28/02/2027</td><td>R$ 8.300</td><td><span class="status ok">ativo</span></td></tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="card">
+          <p class="title">Financeiro</p>
+          <p class="small">Receitas: <strong style="color:#166534">R$ 89.400</strong></p>
+          <p class="small">Despesas: <strong style="color:#9f1239">R$ 21.700</strong></p>
+          <p class="small">Resultado: <strong style="color:var(--brand)">R$ 67.700</strong></p>
+          <hr style="border:0;border-top:1px solid #eef2f7;margin:10px 0" />
+          <p class="small">Próximos alertas:</p>
+          <ul style="padding-left:18px;margin:8px 0 0;font-size:13px">
+            <li>3 contratos vencem em até 30 dias</li>
+            <li>1 pagamento em atraso</li>
+            <li>2 manutenções preventivas agendadas</li>
+          </ul>
+        </article>
+      </section>
+
+      <p class="footer">VetorMD Preview • versão estática para validação em tablet</p>
+    </main>
+  </body>
+</html>
