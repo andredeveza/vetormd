@@ -2,6 +2,21 @@
 
 Boilerplate funcional para um produto SaaS de gestão imobiliária com foco em UX, escalabilidade e visão financeira inteligente.
 
+## 🚀 Jeito mais fácil (leigo) para ver no tablet
+
+Se você só quer **abrir e testar agora**, sem instalar Node/npm:
+
+1. No computador, dentro da pasta do projeto, rode:
+   ```bash
+   ./scripts/run-preview.sh
+   ```
+2. O terminal vai mostrar 2 links:
+   - `http://localhost:4173/preview/` (no computador)
+   - `http://SEU_IP:4173/preview/` (no tablet na mesma rede Wi‑Fi)
+3. No tablet, abra o navegador e acesse o link com `SEU_IP`.
+
+Pronto. Você verá uma versão de preview estática e responsiva.
+
 ## Preview do produto
 
 A tela principal já entrega um preview funcional com:
@@ -48,6 +63,10 @@ src/
     format.ts
   types/
     index.ts
+preview/
+  index.html
+scripts/
+  run-preview.sh
 ```
 
 ## 3) Wireframe textual das telas
@@ -119,7 +138,7 @@ src/
    - benchmark regional de aluguel
 6. Módulo de relatórios financeiros e DRE por carteira.
 
-## 8) Rodando localmente
+## 8) Rodando localmente (app Next.js completo)
 
 ```bash
 npm install
