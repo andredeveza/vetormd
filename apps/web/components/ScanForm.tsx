@@ -6,6 +6,7 @@ const SAMPLE = "URGENTE: Intimação judicial nº 0001234. Pague R$ 480,00 via P
 
 export default function ScanForm({ initial = "" }: { initial?: string }) {
   const [text, setText] = useState(initial);
+  const [consent, setConsent] = useState(false);
   const [state, setState] = useState<"idle" | "loading" | "error">("idle");
   const [report, setReport] = useState<CheatReport | null>(null);
   const [error, setError] = useState("");
@@ -14,7 +15,7 @@ export default function ScanForm({ initial = "" }: { initial?: string }) {
     e.preventDefault();
     setState("loading"); setReport(null); setError("");
     try {
-      const res = await fetch("/api/scans", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ module: "shield", text }) });
+      const res = await fetch("/api/scans", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ module: "shield", content: text, userConsentConfirmed: consent }) });
       const body = await res.json();
       if (!res.ok) { setError(body.message ?? "Erro"); setState("error"); return; }
       setReport(body.report); setState("idle");
@@ -27,7 +28,10 @@ export default function ScanForm({ initial = "" }: { initial?: string }) {
         <label htmlFor="t"><strong>Cole a mensagem suspeita</strong></label>
         <textarea id="t" value={text} onChange={(e) => setText(e.target.value)} maxLength={20000} required />
         <p className="muted">Será enviado apenas este texto. Não cole senhas, códigos ou dados de cartão. Provider atual: <strong>mock (demonstração)</strong>.</p>
-        <button className="btn" disabled={state === "loading" || !text.trim()}>{state === "loading" ? "Analisando…" : "Activate Cheat"}</button>{" "}
+        <label style={{ display: "block", margin: "8px 0" }}>
+          <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} /> Autorizo analisar apenas este texto. Resultado é informativo, não substitui confirmação oficial ou parecer jurídico.
+        </label>
+        <button className="btn" disabled={state === "loading" || !consent || text.trim().length < 10}>{state === "loading" ? "Analisando…" : "Activate Cheat"}</button>{" "}
         <button type="button" onClick={() => setText(SAMPLE)}>Usar exemplo fictício</button>
       </form>
       {state === "error" && <p role="alert" className="high">{error}</p>}
@@ -41,7 +45,7 @@ const SEV = { info: "Info", attention: "Atenção", high: "Alto" } as const;
 function Report({ r }: { r: CheatReport }) {
   return (
     <section aria-label="Cheat Report" className="card">
-      <h2>Cheat Report <span className="tag">{r.status === "complete" ? "completo" : "inconclusivo"}</span></h2>
+      <h2>Cheat Report {r.mode === "synthetic_fixture" && <span className="tag warn">MODO DEMO (fixture)</span>} <span className="tag">{r.status === "complete" ? "completo" : "inconclusivo"}</span></h2>
       <p><strong>Nível de atenção:</strong> {r.attention}</p>
       <p>{r.summary}</p>
       {r.findings.map((f, i) => (

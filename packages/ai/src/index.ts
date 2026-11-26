@@ -16,3 +16,5 @@ export async function runScan(req: ScanRequest, provider: LLMProvider = mockProv
   const v = validateReport(raw, req.text);
   return v.ok ? { ok: true, report: v.report, provider: provider.name } : { ok: false, errors: v.errors };
 }
+export * from "./prompts";
+export * from "./gemini";

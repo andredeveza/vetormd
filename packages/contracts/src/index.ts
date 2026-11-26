@@ -27,6 +27,7 @@ export const CheatReportSchema = z.object({
   schemaVersion: z.literal("1.0"),
   module: ModuleSchema,
   locale: z.string(),
+  mode: z.enum(["synthetic_fixture", "live_analysis"]),
   status: z.enum(["complete", "inconclusive"]),
   summary: z.string().min(1),
   attention: z.enum(["low", "attention", "high", "unknown"]),
@@ -56,3 +57,12 @@ export const ScanRequestSchema = z.object({
   locale: z.string().default("pt-BR"),
 });
 export type ScanRequest = z.infer<typeof ScanRequestSchema>;
+
+/** Entrada da API pública: exige consentimento contextual explícito. */
+export const ScanTextInputSchema = z.object({
+  module: z.literal("shield"),
+  locale: z.string().default("pt-BR"),
+  content: z.string().trim().min(10, "Cole pelo menos 10 caracteres.").max(8000, "Limite de 8.000 caracteres excedido."),
+  userConsentConfirmed: z.literal(true, { errorMap: () => ({ message: "Confirme o consentimento antes de enviar." }) }),
+});
+export type ScanTextInput = z.infer<typeof ScanTextInputSchema>;

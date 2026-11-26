@@ -47,7 +47,7 @@ export function analyzeShield(req: ScanRequest): CheatReport {
   ];
   if (findings.length === 0) {
     return {
-      schemaVersion: "1.0", module: "shield", locale: req.locale, status: "inconclusive",
+      schemaVersion: "1.0", module: "shield", locale: req.locale, mode: "synthetic_fixture", status: "inconclusive",
       summary: "Nenhum sinal claro encontrado no texto. Resultado inconclusivo, não é garantia de segurança.",
       attention, findings, evidence,
       recommendedMoves: [{ title: "Verifique pelo canal oficial", steps: ["Contate a empresa ou órgão por telefone ou site obtido de forma independente."], rationale: "Sem sinais claros, só verificação independente confirma a origem." }],
@@ -55,7 +55,7 @@ export function analyzeShield(req: ScanRequest): CheatReport {
     };
   }
   return {
-    schemaVersion: "1.0", module: "shield", locale: req.locale, status: "complete",
+    schemaVersion: "1.0", module: "shield", locale: req.locale, mode: "synthetic_fixture", status: "complete",
     summary: `${findings.length} indício(s) de risco encontrado(s) no texto. Trate como suspeito até verificar.`,
     attention, findings, evidence,
     recommendedMoves: [{
